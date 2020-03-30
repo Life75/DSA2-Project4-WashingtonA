@@ -33,6 +33,7 @@ TEST_CASE("FileReaderAndWriter Class")
 {
     FileReaderAndWriter* test = new FileReaderAndWriter();
     std::queue<int> specs;
+    std::queue<Batches*> holder;
     specs = test->readFilesSimOne("t1.txt");
     REQUIRE(100 == specs.front());
     specs.pop();
@@ -48,14 +49,25 @@ TEST_CASE("FileReaderAndWriter Class")
 
     REQUIRE(30 == specs.front());
     specs.pop();
-    Batches* batch = new Batches(false, 20, 8);
-    //test->writeFilesSimOne(2, batch, "t1.txt" );
+
+    Batches* batch[100];
+    for(int i=0; i< 100; i++)
+    {
+        batch[i] = new Batches(true, 50, 8);
+        holder.push(batch[i]);
+    }
+
+    for(int i=0; i<100;i++)
+    {
+      test->writeFilesSimOne("t1.txt", batch[i], i );
+    }
+    
 }
 
 TEST_CASE("SimOne Class")
 {
     SimOne* simOne = new SimOne();
-    simOne->simulationProceed("t1.txt"); 
+    //simOne->simulationProceed("t1.txt"); 
     
 }
 

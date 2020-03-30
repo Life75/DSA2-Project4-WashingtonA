@@ -27,7 +27,7 @@ void SimOne::simulationProceed(std::string fileName)
 {
     FileReaderAndWriter* test = new FileReaderAndWriter();
     std::queue<int> specs;
-    std::queue<Batches*> vect;
+    std::queue<Batches*> holdBatches;
     
     specs = test->readFilesSimOne(fileName);
 
@@ -59,8 +59,8 @@ void SimOne::simulationProceed(std::string fileName)
         {
             batch = new Batches(false, numOfItems, percOfBadItems);
         }
-        vect.push(batch);
+        holdBatches.push(batch);
         batchChance.pop();
     }
-    test->writeFilesSimOne(fileName, vect);
+    //test->writeFilesSimOne(fileName, holdBatches);
 }

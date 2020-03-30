@@ -15,6 +15,6 @@ class FileReaderAndWriter
     public:
     FileReaderAndWriter();
     std::queue<int> readFilesSimOne(std::string fileName);
-    void writeFilesSimOne( std::string fileName, std::queue<Batches*> vect);
+    void writeFilesSimOne( std::string fileName,  Batches* batch, int batchNum);
 };
 #endif 

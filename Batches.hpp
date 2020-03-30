@@ -18,6 +18,7 @@ class Batches
     bool getCheckBatch();
     void getRandomNum(); 
     std::queue<bool> getBatch();
+    int getNumOfItems();
 
 };
 #endif 

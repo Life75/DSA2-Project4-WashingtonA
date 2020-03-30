@@ -53,3 +53,7 @@ std::queue<bool> Batches::getBatch()
     return batch;
 }
 
+int Batches::getNumOfItems()
+{
+    return numOfItems;
+}

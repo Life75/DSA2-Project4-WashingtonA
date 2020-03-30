@@ -20,18 +20,14 @@ std::queue<int> FileReaderAndWriter::readFilesSimOne(std::string fileName)
     return specs;
 }
 
-void FileReaderAndWriter::writeFilesSimOne(std::string fileName, std::queue<Batches*> vect)
+void FileReaderAndWriter::writeFilesSimOne(std::string fileName, Batches* batch, int batchNum)
 {
     //Makes Linux directories 
     std::fstream file;
     std::ostringstream os; 
-    int batchNum =0;
-  
     std::queue<bool> checker;
-    while(!vect.empty())
-    {
-        checker =  vect.front()->getBatch();
-        std::ofstream fout;
+    checker = batch->getBatch();
+
     
     if(fileName == "t1.txt")
     {
@@ -39,26 +35,30 @@ void FileReaderAndWriter::writeFilesSimOne(std::string fileName, std::queue<Batc
         {
 
         }
-        
-        os << "t1 Batches/ds" << batchNum << ".txt";
+            os << "t1 Batches/ds" << batchNum << ".txt";
+            //std::cout << batchNum << std::endl;
+            std::ofstream fout(os.str());
 
-        
-        fout.open(os.str(), std::ios::out);
         while(!checker.empty())
         {
             if(checker.front())
             {
-                fout << 'G' << std::endl;
+                fout << "G";
             }
-            else fout << 'B' << std::endl;
+            else 
+            {
+                fout << "B";
+            }
+            fout << std::endl;
             checker.pop();
+
         }
-        batchNum++;
-    fout.close();
-    vect.pop();
+        fout.close();
+
     }
-    }
-    
+
+}
+
     /*
     if(fileName == "t2.txt")
         if(mkdir("t2 Batches", 0777) ==-1)
@@ -79,4 +79,3 @@ void FileReaderAndWriter::writeFilesSimOne(std::string fileName, std::queue<Batc
         }
 */
     
-}
