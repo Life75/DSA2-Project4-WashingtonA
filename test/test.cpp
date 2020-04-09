@@ -27,6 +27,8 @@ TEST_CASE("Batches Class")
         //std::cout << test.front() << std::endl;
         test.pop();
     }
+
+
 }
 
 TEST_CASE("FileReaderAndWriter Class")
@@ -49,7 +51,7 @@ TEST_CASE("FileReaderAndWriter Class")
 
     REQUIRE(30 == specs.front());
     specs.pop();
-
+/*
     Batches* batch[100];
     for(int i=0; i< 100; i++)
     {
@@ -61,14 +63,13 @@ TEST_CASE("FileReaderAndWriter Class")
     {
       test->writeFilesSimOne("t1.txt", batch[i], i );
     }
-    
+  */  
 }
 
 TEST_CASE("SimOne Class")
 {
     SimOne* simOne = new SimOne();
-    //simOne->simulationProceed("t1.txt"); 
-    
+    simOne->Output();
 }
 
 TEST_CASE("SimTwo Class")

@@ -16,5 +16,7 @@ class FileReaderAndWriter
     FileReaderAndWriter();
     std::queue<int> readFilesSimOne(std::string fileName);
     void writeFilesSimOne( std::string fileName,  Batches* batch, int batchNum);
+    void analyzeDataSets(std::string fileName, int itemsSampled, int numOfBatches);
+
 };
 #endif 

@@ -9,14 +9,15 @@
 class SimOne
 {
     private:
-    int numOfBatches =0;
-    int percOfBadBatches =0;
+    int simulationNumber =0;
+    int numOfBatches, numOfItems, percOfBadItems, itemsSampled, percOfBadBatches;
     std::queue<bool> batchChance;
     void genBatchChance();
     
     public:
     SimOne();
     void simulationProceed(std::string fileName);
+    void Output();
 
 };
 #endif

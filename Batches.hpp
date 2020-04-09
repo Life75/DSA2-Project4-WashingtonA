@@ -9,9 +9,12 @@ class Batches
 {
     private:
     std::queue<int> randNumHolder;
+    std::queue<bool> batch;
     int numOfItems=0;
     bool checkBatch = true;
     int percOfBadItems=0;
+    int numOfBadItems =0;
+
     
     public:
     Batches(bool checkBatch, int numOfItems, int percOfBadItems);
@@ -19,6 +22,9 @@ class Batches
     void getRandomNum(); 
     std::queue<bool> getBatch();
     int getNumOfItems();
+    int getNumOfBadItems();
+    void makeBatch();
+
 
 };
 #endif 
