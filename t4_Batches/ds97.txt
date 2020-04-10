@@ -58,6 +58,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -217,6 +218,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -306,6 +308,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -343,6 +346,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -365,6 +369,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -422,6 +427,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -430,6 +436,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -481,6 +488,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -541,6 +549,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -583,6 +592,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -736,8 +746,11 @@ G
 G
 G
 G
+B
 G
 G
+B
+B
 G
 G
 G
@@ -759,6 +772,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -912,6 +926,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -950,6 +965,7 @@ G
 G
 G
 G
+B
 G
 G
 G
@@ -972,23 +988,7 @@ G
 G
 G
 G
-G
-G
-G
-G
-G
-G
-G
-G
-G
-G
-G
-G
-G
-G
-G
-G
-G
+B
 G
 G
 G

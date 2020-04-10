@@ -7,30 +7,16 @@ Batches::Batches(bool checkBatch, int numOfItems, int percOfBadItems)
     this->percOfBadItems = percOfBadItems;
 }
 
-void Batches::getRandomNum()
-{
-    if(randNumHolder.empty())
-    {
-        srand((unsigned) time(NULL)); 
-        for(int i=0; i < numOfItems; i++)
-        {
-            int randNum = rand() % 100 + 0;
-            //std::cout << randNum << std::endl;
-            randNumHolder.push(randNum);
-        }
-    }
-}
-
 bool Batches::getCheckBatch()
 {
     return checkBatch;
 }
 
 //replace the rand queue with a variable and a param for makeBatch() taking in a random # variable, go thru some incremental testing with this slow and steady 
-void Batches::makeBatch()
+void Batches::makeBatch(std::queue<int> randNumHolder)
 {
     //if good fill queue with true so it'll print out all true for the batch
-    getRandomNum();
+   // getRandomNum();
     if(checkBatch)
     {
         for(int i=0; i < numOfItems; i++)
@@ -40,14 +26,19 @@ void Batches::makeBatch()
     }
     else 
     {
-        for(int i= 0; i < numOfItems; i++)
+       
+        for(int i=0; i < numOfItems; i++)
         {
             if(randNumHolder.front() <= percOfBadItems)
             {
                 batch.push(false);
                 numOfBadItems++;
             }
-            else batch.push(true);
+            else 
+            {
+                batch.push(true);
+            }
+
             randNumHolder.pop();
         }
     }

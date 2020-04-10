@@ -9,6 +9,7 @@
 #include "../FileReaderAndWriter.hpp"
 #include "../SimOne.hpp"
 
+
 TEST_CASE("Batches Class")
 {
     Batches Batch(true, 100, 7);
@@ -21,14 +22,18 @@ TEST_CASE("Batches Class")
     } 
 
     Batches BadBatch(false, 100, 7);
+    
     test = BadBatch.getBatch();
     while(!test.empty())
     {
-        //std::cout << test.front() << std::endl;
+        std::cout << test.front() << std::endl;
+        if(test.front() == false) 
+        {
+            REQUIRE(true);
+            std::cout << "je;";
+        }
         test.pop();
     }
-
-
 }
 
 TEST_CASE("FileReaderAndWriter Class")
@@ -68,7 +73,10 @@ TEST_CASE("FileReaderAndWriter Class")
 
 TEST_CASE("SimOne Class")
 {
+    std::queue<int> test;
     SimOne* simOne = new SimOne();
+   
+    
     simOne->Output();
 }
 

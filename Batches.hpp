@@ -8,7 +8,7 @@
 class Batches
 {
     private:
-    std::queue<int> randNumHolder;
+    //std::queue<int> randNumHolder;
     std::queue<bool> batch;
     int numOfItems=0;
     bool checkBatch = true;
@@ -23,7 +23,7 @@ class Batches
     std::queue<bool> getBatch();
     int getNumOfItems();
     int getNumOfBadItems();
-    void makeBatch();
+    void makeBatch(std::queue<int> randNumHolder);
 
 
 };

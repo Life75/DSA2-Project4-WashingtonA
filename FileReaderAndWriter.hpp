@@ -4,6 +4,7 @@
 #include <queue>
 #include <fstream>
 #include "Batches.hpp"
+#include <math.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sstream>
@@ -16,7 +17,7 @@ class FileReaderAndWriter
     FileReaderAndWriter();
     std::queue<int> readFilesSimOne(std::string fileName);
     void writeFilesSimOne( std::string fileName,  Batches* batch, int batchNum);
-    void analyzeDataSets(std::string fileName, int itemsSampled, int numOfBatches);
+    void analyzeDataSets(std::string fileName, int itemsSampled, int numOfBatches, int percOfBadItems, int numOfBadBatches);
 
 };
 #endif 

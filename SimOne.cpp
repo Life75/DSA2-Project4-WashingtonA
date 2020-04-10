@@ -6,6 +6,12 @@ SimOne::SimOne()
 
 }
 
+SimOne::SimOne(int numOfBatches, int numOfItems)
+{
+    numOfBatches = numOfBatches;
+    numOfItems = numOfItems;
+}
+
 void SimOne::genBatchChance()
 {
     int randNum =0;
@@ -27,13 +33,42 @@ void SimOne::genBatchChance()
 Create a function to create rand for batches and weave it thru into the Batches class giving better random results because every function call to  getRandNum is good enough randoming 
 so numOfBatches * 
 */
+
+void SimOne::randGen()
+{
+    int totalRand = numOfBatches * numOfItems;
+    if(randNumHolder.empty())
+    {
+        srand((unsigned) time(NULL));
+        for(int i=0; i < totalRand; i++)
+        {
+            int randNum = rand() % 100 + 0;
+            randNumHolder.push(randNum);
+         //   std::cout << i << "\n";
+        }
+    }
+}
+//parses the data and returns a queue for it 
+std::queue<int> SimOne::randGenParser()
+{
+    std::queue<int> parse;
+    int rand =0;
+    for(int i=0; i < numOfItems; i++)
+    {
+        rand = randNumHolder.front();
+        parse.push(rand);
+        randNumHolder.pop();
+    }
+    return parse;
+}
+
 void SimOne::simulationProceed(std::string fileName)
 {
     simulationNumber++;
     FileReaderAndWriter* test = new FileReaderAndWriter();
     std::queue<int> specs;
     std::queue<Batches*> holdBatches;
-    int numOfBadBatches =0;
+    numOfBadBatches =0;
     
     specs = test->readFilesSimOne(fileName);
 
@@ -53,6 +88,8 @@ void SimOne::simulationProceed(std::string fileName)
     specs.pop();
 
     genBatchChance();
+    randGen();
+
 
     std::cout << "Simulation " << simulationNumber << ": \n";
     std::cout << "Number of items in each batch: " << numOfItems << std::endl;
@@ -70,13 +107,13 @@ void SimOne::simulationProceed(std::string fileName)
         if(batchChance.front())
         {
             batch = new Batches(true, numOfItems, percOfBadItems);
-            batch->makeBatch();
+            batch->makeBatch(randGenParser());
         }
         else
         {
             batch = new Batches(false, numOfItems, percOfBadItems);
             numOfBadBatches++;
-            batch->makeBatch();
+            batch->makeBatch(randGenParser());
           
             std::cout << "Create bad set batch # " << i << ", totBad = " << batch->getNumOfBadItems()
             << " total = " << numOfItems << " badpct = " << percOfBadItems << "%" << std::endl;
@@ -87,7 +124,6 @@ void SimOne::simulationProceed(std::string fileName)
     }
     std::cout << "Total bad sets = " << numOfBadBatches << std::endl;
     std::cout << std::endl;
-    delete test;
 }
 
 void SimOne::Output()
@@ -95,9 +131,14 @@ void SimOne::Output()
     FileReaderAndWriter* test = new FileReaderAndWriter();
     
     simulationProceed("t1.txt"); 
-    test->analyzeDataSets("t1.txt", itemsSampled, numOfBatches);
+    test->analyzeDataSets("t1.txt", itemsSampled, numOfBatches, percOfBadItems, numOfBadBatches);
     
-   // simulationProceed("t2.txt");
-    //simulationProceed("t3.txt");
-  // simulationProceed("t4.txt");
+    simulationProceed("t2.txt");
+    test->analyzeDataSets("t1.txt", itemsSampled, numOfBatches, percOfBadItems, numOfBadBatches);
+    
+    simulationProceed("t3.txt");
+    test->analyzeDataSets("t1.txt", itemsSampled, numOfBatches, percOfBadItems, numOfBadBatches);
+
+    simulationProceed("t4.txt");
+    test->analyzeDataSets("t1.txt", itemsSampled, numOfBatches, percOfBadItems, numOfBadBatches);
 }

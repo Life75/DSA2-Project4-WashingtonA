@@ -43,11 +43,11 @@ void FileReaderAndWriter::writeFilesSimOne(std::string fileName, Batches* batch,
         {
             if(checker.front())
             {
-                fout << "G";
+                fout << 'G';
             }
             else 
             {
-                fout << "B";
+                fout << 'B';
             }
             fout << std::endl;
             checker.pop();
@@ -143,37 +143,84 @@ void FileReaderAndWriter::writeFilesSimOne(std::string fileName, Batches* batch,
 
 }
 
-void FileReaderAndWriter::analyzeDataSets(std::string filename, int itemsSampled, int numOfBatches)
+void FileReaderAndWriter::analyzeDataSets(std::string filename, int itemsSampled, int numOfBatches, int percOfBadItems, int numOfBadBatches)
 {
     std::fstream file;
-    std::ostringstream os;
-    std::string item;
+    char item = 'B';
     bool badBatch =false;
+    std::string nameOfFile;
+    double numOfFoundBadBatches =0;
 
     std::cout << "Analyszing Data Sets: \n";
-
+    //std::cout << numOfBatches;
     for(int i=0; i < numOfBatches; i++)
-    {
+    {   
         if(filename == "t1.txt")
         {
-            os << "t1_Batches/ds" << i << ".txt";
-            file.open(os.str().c_str());
-            for(int j=0; j < itemsSampled; j++)
+            std::ostringstream os;
+            os << "t1_Batches/ds" << i << ".txt";            
+            nameOfFile = os.str();
+        }
+
+        if(filename == "t2.txt")
+        {
+            std::ostringstream os;
+            os << "t2_Batches/ds" << i << ".txt";            
+            nameOfFile = os.str();
+        }
+
+        if(filename == "t3.txt")
+        {
+            std::ostringstream os;
+            os << "t3_Batches/ds" << i << ".txt";            
+            nameOfFile = os.str();
+        }
+
+        if(filename == "t4.txt")
+        {
+            std::ostringstream os;
+            os << "t4_Batches/ds" << i << ".txt";            
+            nameOfFile = os.str();
+        }
+            file.open(nameOfFile);
+            
+            int j=0;
+            for(int k =0; k < itemsSampled; k++)
             {
                 file >> item;
-                if(item == "B")
+                if(item == 'B')
                 {
                     badBatch = true;
-                    std::cout << "hello\n";
                 }
             }
-            if(badBatch)
+            if (badBatch)
             {
-                std::cout << "batch # " << i << " is bad\n";
+                std::cout << "Bad Batch # " << i << "  \n";
+                badBatch = false; 
+                numOfFoundBadBatches++;
             }
-            badBatch = false;
-        }    
+
+            file.close();   
     }
+    double percDoubBadItems = 0;
+    double percentageOfBadItems =0;
+    double baseCalc =0;
+    double exponent =0;
+    double pFailure =0;
+    double percentageOfActualBadBatches =0;
+
+    percDoubBadItems += percOfBadItems;
+    percentageOfBadItems += percDoubBadItems / 100;
+    baseCalc += 1 - percentageOfBadItems;
+    exponent += itemsSampled;
+    pFailure += pow(baseCalc, exponent);   
+    percentageOfActualBadBatches +=  numOfFoundBadBatches /numOfBadBatches; 
+    
+    std::cout << "Base: " << baseCalc << " exponent: " << exponent << std::endl;
+    std::cout << "P(failure to detect bad batch) = " << pFailure <<std::endl;
+    std::cout << "Percentage of bad batches actually detected = " << percentageOfActualBadBatches << std::endl;
+
+
     
 }
 
