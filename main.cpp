@@ -1,20 +1,19 @@
 #include "FileReaderAndWriter.hpp"
 #include "Batches.hpp"
+#include "SimTwo.hpp"
+#include "SimOne.hpp"
+#include "Infer.hpp"
+/*
+Banner Austyn Washington 
+4/10/2020
+Computes the data given from the text files and prints them out from main 
+*/
 
 int main()
 {
-    FileReaderAndWriter* test = new FileReaderAndWriter();
+    SimTwo* simTwo = new SimTwo();
+    SimOne* simOne = new SimOne();
 
-    Batches* batch[5];
-    for(int i=0; i< 5; i++)
-    {
-        //the middle param is the amount of items per batch: try the values of 20 and 50
-        //20 will actually print out fine, but 50 doesn't want to come out right
-        batch[i] = new Batches(true, 50, 8);
-    }
-
-    for(int i=0; i< 5; i++)
-    {
-        test->writeFilesSimOne("t1.txt", batch[i], i);
-    }
+    simOne->Output();
+    simTwo->Output();
 }

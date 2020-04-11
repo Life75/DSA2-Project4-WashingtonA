@@ -134,11 +134,11 @@ void SimOne::Output()
     test->analyzeDataSets("t1.txt", itemsSampled, numOfBatches, percOfBadItems, numOfBadBatches);
     
     simulationProceed("t2.txt");
-    test->analyzeDataSets("t1.txt", itemsSampled, numOfBatches, percOfBadItems, numOfBadBatches);
+    test->analyzeDataSets("t2.txt", itemsSampled, numOfBatches, percOfBadItems, numOfBadBatches);
     
     simulationProceed("t3.txt");
-    test->analyzeDataSets("t1.txt", itemsSampled, numOfBatches, percOfBadItems, numOfBadBatches);
+    test->analyzeDataSets("t3.txt", itemsSampled, numOfBatches, percOfBadItems, numOfBadBatches);
 
     simulationProceed("t4.txt");
-    test->analyzeDataSets("t1.txt", itemsSampled, numOfBatches, percOfBadItems, numOfBadBatches);
+    test->analyzeDataSets("t4.txt", itemsSampled, numOfBatches, percOfBadItems, numOfBadBatches);
 }

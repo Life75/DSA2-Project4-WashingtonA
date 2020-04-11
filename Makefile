@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -g -std=c++11 -Wall -ftest-coverage -fprofile-arcs
 
 SRCS = $(wildcard *.hpp)
-OBJECTS = Batches.o FileReaderAndWriter.o SimOne.o $(SRCS:%.hpp=%.o) 
+OBJECTS = Batches.o FileReaderAndWriter.o SimOne.o Infer.o SimTwo.o $(SRCS:%.hpp=%.o) 
 
 main: $(OBJECTS) main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^

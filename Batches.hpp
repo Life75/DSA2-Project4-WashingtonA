@@ -4,7 +4,11 @@
 #include <iostream>
 #include <queue>
 
-//Banner
+/*
+Banner Austyn Washington 
+4/10/2020
+Holds the data for the batches to create and generate random items 
+*/
 class Batches
 {
     private:

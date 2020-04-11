@@ -8,6 +8,8 @@
 #include "../Batches.hpp"
 #include "../FileReaderAndWriter.hpp"
 #include "../SimOne.hpp"
+#include "../Infer.hpp"
+#include "../SimTwo.hpp"
 
 
 TEST_CASE("Batches Class")
@@ -68,7 +70,26 @@ TEST_CASE("FileReaderAndWriter Class")
     {
       test->writeFilesSimOne("t1.txt", batch[i], i );
     }
-  */  
+  */ 
+
+ //SimTwo testing 
+    std::queue<Infer*> ex;
+    ex = test->SimTwoFileReader();
+    REQUIRE(100 == test->getNumOfDays());
+    REQUIRE(7 == test->getNumOfCategories());
+
+    REQUIRE(15 ==  ex.front()->getProb());
+    REQUIRE(0 == ex.front()->getStartInter());
+    REQUIRE(2000 == ex.front()->getEndInter());
+}
+
+TEST_CASE("Infer")
+{
+    Infer test;
+    test.setStartInter(0);
+    test.setEndInter(49);
+    REQUIRE(test.check(25)); 
+
 }
 
 TEST_CASE("SimOne Class")
@@ -77,10 +98,15 @@ TEST_CASE("SimOne Class")
     SimOne* simOne = new SimOne();
    
     
-    simOne->Output();
+    //simOne->Output(); works
 }
 
 TEST_CASE("SimTwo Class")
 {
+    SimTwo* test = new SimTwo();
+    //test->randNumGen();
+    //test->proceedSimulation();
+    //test->AModel();
 
+    test->Output();
 }

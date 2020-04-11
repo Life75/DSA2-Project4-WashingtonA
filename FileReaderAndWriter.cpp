@@ -36,7 +36,6 @@ void FileReaderAndWriter::writeFilesSimOne(std::string fileName, Batches* batch,
 
         }
             os << "t1_Batches/ds" << batchNum << ".txt";
-            //std::cout << batchNum << std::endl;
             std::ofstream fout(os.str());
 
         while(!checker.empty())
@@ -64,7 +63,6 @@ void FileReaderAndWriter::writeFilesSimOne(std::string fileName, Batches* batch,
 
         }
             os << "t2_Batches/ds" << batchNum << ".txt";
-            //std::cout << batchNum << std::endl;
             std::ofstream fout(os.str());
 
         while(!checker.empty())
@@ -92,7 +90,6 @@ void FileReaderAndWriter::writeFilesSimOne(std::string fileName, Batches* batch,
 
         }
             os << "t3_Batches/ds" << batchNum << ".txt";
-            //std::cout << batchNum << std::endl;
             std::ofstream fout(os.str());
 
         while(!checker.empty())
@@ -120,7 +117,6 @@ void FileReaderAndWriter::writeFilesSimOne(std::string fileName, Batches* batch,
 
         }
             os << "t4_Batches/ds" << batchNum << ".txt";
-            //std::cout << batchNum << std::endl;
             std::ofstream fout(os.str());
 
         while(!checker.empty())
@@ -152,7 +148,6 @@ void FileReaderAndWriter::analyzeDataSets(std::string filename, int itemsSampled
     double numOfFoundBadBatches =0;
 
     std::cout << "Analyszing Data Sets: \n";
-    //std::cout << numOfBatches;
     for(int i=0; i < numOfBatches; i++)
     {   
         if(filename == "t1.txt")
@@ -224,5 +219,58 @@ void FileReaderAndWriter::analyzeDataSets(std::string filename, int itemsSampled
     
 }
 
-
+std::queue<Infer*> FileReaderAndWriter::SimTwoFileReader()
+{
+    std::queue<Infer*> dataPoints;
+    std::string filename = "readings.txt";
     
+    std::string reader;
+    std::fstream file;
+    file.open(filename);
+
+    int i =0;
+
+    while(file >> reader)
+    {
+        
+        if(i == 0)
+        {
+            numOfDays = stoi(reader);
+        }
+
+        if(i == 1)
+        {
+            numOfCategories = stoi(reader);
+        }
+
+        if(i > 1 )
+        {
+            
+            Infer* object = new Infer();
+            object->setData(reader);
+            object->setCategory(i-2);
+
+            if(i-2 != numOfCategories)
+            {
+                dataPoints.push(object);
+
+            }
+            
+        }
+        i++;
+    }
+    
+    return dataPoints;
+}
+
+int FileReaderAndWriter::getNumOfDays()
+{
+    return numOfDays;
+}
+
+int FileReaderAndWriter::getNumOfCategories()
+{
+    return numOfCategories;
+}
+
+
